@@ -31,7 +31,7 @@ export function initXMLHttpRequestClick() {
         let url = 'http://localhost:4200/comment/listById';
 
         xhr.open('post',url,true);
-        xhr.responseType = 'json';
+        // xhr.responseType = 'json';
         // 请求参数
         let sendData = {
             name1: "value1",
@@ -53,7 +53,7 @@ export function initXMLHttpRequestClick() {
         }(sendData));
 
         // 设置请求头(JSON.stringify(sendData)) 对应使用这种方式传递参数
-        xhr.setRequestHeader('content-type', 'application/json');
+        xhr.setRequestHeader('Content-Type', 'application/json');
 
 
         // 表单提交类型（其一）
@@ -75,13 +75,12 @@ export function initXMLHttpRequestClick() {
         xhr.onreadystatechange = function() {
             if(xhr.readyState === 4) {
                 if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-                  
                     console.log(xhr.response)
                     console.log('xhr');
                 }
             }
         }
-        // 请求参数方式1（JSON格式）
+        // 请求参数方式1（非JSON格式）
         // xhr.send(postData);
         // 请求参数方式2（JSON格式）
         xhr.send(JSON.stringify(sendData));

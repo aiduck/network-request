@@ -4,9 +4,11 @@ export function initFetch() {
         headers: { "Content-Type": "application/json"}, // 设置请求头
         // body: JSON.stringify({name:'123'}), // 请求参数
         credentials: "same-origin", // cookie设置
-        mode: "cors", // 跨域
+        mode: "no-cors", // 跨域
     }
-    fetch('/comment/listError?name=12',options)
+    let url = 'http://localhost:4200/comment/listById';
+    // let url = '/comment/listError?name=12'
+    fetch(url,options)
         .then(function(response) {
             // 将webpack 的proxy修改掉就可以实现404
             // 注意：当和服务器建立简介，并收到服务器的异常状态码如404、500等并不能触发onerror。当网络故障时或请求被阻止时，才会标记为 reject，如跨域、url不存在，网络异常等会触发onerror。
@@ -17,11 +19,13 @@ export function initFetch() {
             // 为何用json =>  this._initBody(bodyInit) 因为fetch源码中response内容封装到了Body这个对象中
             // body这个对象中具有.json(),.text(),.formData等方法
             // 只能使用一次读取流，body.bodyUsed = true，这个参数的原因
-            console.log(response.text()); // 报错
-            return response.json();
+            // console.log(response.text()); // 报错
+            // response.json();
+            // response.formData();
+            console.log(response);
+            return response.text(); 
         })
         .then(function(myJson) {
-            
             console.log(myJson); // 响应数据
         })
         .catch(function(err){
